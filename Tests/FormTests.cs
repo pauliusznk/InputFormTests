@@ -94,7 +94,6 @@ namespace InputFormTests.Tests
             Submission submission = new Submission(StringGenerator.GenerateRandomString(20), StringGenerator.GenerateRandomString(20), null, "Lithuania", StringGenerator.GenerateRandomString(1));
             await _formPage.GoTo();
             await _formPage.SubmitForm(submission);
-            await Task.Delay(3000);
             await _formPage.AgeErrorVisible();
             await _responsePage.AssertPageIsNotLoaded();
         }
@@ -104,7 +103,6 @@ namespace InputFormTests.Tests
             Submission submission = new Submission(StringGenerator.GenerateRandomString(20), StringGenerator.GenerateRandomString(20), 17, "Lithuania", StringGenerator.GenerateRandomString(1));
             await _formPage.GoTo();
             await _formPage.SubmitForm(submission);
-            await Task.Delay(3000);
             await _formPage.AgeErrorVisible();
             await _responsePage.AssertPageIsNotLoaded();
         }
@@ -114,7 +112,6 @@ namespace InputFormTests.Tests
             Submission submission = new Submission(StringGenerator.GenerateRandomString(20), StringGenerator.GenerateRandomString(20), 81, "Lithuania", StringGenerator.GenerateRandomString(1));
             await _formPage.GoTo();
             await _formPage.SubmitForm(submission);
-            await Task.Delay(3000);
             await _formPage.AgeErrorVisible();
             await _responsePage.AssertPageIsNotLoaded();
         }
