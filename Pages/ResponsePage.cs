@@ -17,6 +17,7 @@ namespace InputFormTests.Pages
         private readonly ILocator _ageResponse;
         private readonly ILocator _countryResponse;
         private readonly ILocator _notesResponse;
+        private readonly ILocator _responseHeader;
         public ResponsePage(IPage page)
         {
             _page = page;
@@ -25,6 +26,12 @@ namespace InputFormTests.Pages
             _ageResponse = _page.Locator("#age-value");
             _countryResponse = _page.Locator("#country-value");
             _notesResponse = _page.Locator("#notes-value");
+            _responseHeader = _page.GetByText("Input Validation Response");
+        }
+        public async Task AssertPageIsNotLoaded()
+        {
+            bool isVisible = await _responseHeader.IsVisibleAsync();
+            Assert.IsFalse(isVisible);
         }
         public async Task CheckResponse(Submission submission)
         {

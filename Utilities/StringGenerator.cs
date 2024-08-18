@@ -16,7 +16,7 @@ namespace InputFormTests.Utilities
 
             for (int i = 0; i < length; i++)
             {
-                result.Append(chars[random.Next(chars.Length)]);
+                result.Append(chars[random.Next(chars.Length)]);    
             }
 
             return result.ToString();

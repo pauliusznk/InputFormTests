@@ -18,7 +18,9 @@ namespace InputFormTests.Pages
         private readonly ILocator _notesInput;
         private readonly ILocator _submitButton;
         private readonly ILocator _firstNameCustomError;
-        private readonly ILocator _firstNameHtmlError;
+        private readonly ILocator _lastNameCustomError;
+        private readonly ILocator _ageCustomError;
+        private readonly ILocator _countryCustomError;
 
 
         public FormPage(IPage page)
@@ -31,6 +33,8 @@ namespace InputFormTests.Pages
             _notesInput = _page.Locator("#notes");
             _submitButton = _page.Locator("input[type=\"submit\"]");
             _firstNameCustomError = _page.Locator("[name=\"firstnamevalidation\"]");
+            _lastNameCustomError = _page.Locator("[name=\"surnamevalidation\"]");
+            _ageCustomError = _page.Locator("[name=\"agevalidation\"]");
         }
         public async Task GoTo()
         {
@@ -44,6 +48,30 @@ namespace InputFormTests.Pages
             await _countryInput.SelectOptionAsync(submission.Country);
             await _notesInput.FillAsync(submission.Notes);
             await _submitButton.ClickAsync();
+        }
+        public async Task FirstNameErrorVisible()
+        {
+            bool isCustomErrorVisible = await _firstNameCustomError.IsVisibleAsync();
+            string validationMessage = await _firstNameInput.EvaluateAsync<string>("input => input.validationMessage");
+            bool isHtmlErrorVisible = !string.IsNullOrEmpty(validationMessage);
+            Assert.IsTrue(isCustomErrorVisible || isHtmlErrorVisible);
+        }
+        public async Task LastNameErrorVisible()
+        {
+            bool isCustomErrorVisible = await _lastNameCustomError.IsVisibleAsync();
+            string validationMessage = await _lastNameInput.EvaluateAsync<string>("input => input.validationMessage");
+            bool isHtmlErrorVisible = !string.IsNullOrEmpty(validationMessage);
+            Assert.IsTrue(isCustomErrorVisible || isHtmlErrorVisible);
+        }
+        public async Task AgeErrorVisible()
+        {
+            bool isCustomErrorVisible = await _ageCustomError.IsVisibleAsync();
+            string validationMessage = await _ageInput.EvaluateAsync<string>("input => input.validationMessage");
+            bool isHtmlErrorVisible = !string.IsNullOrEmpty(validationMessage);
+            Console.WriteLine(isCustomErrorVisible);
+            Console.WriteLine(isHtmlErrorVisible);
+            Console.WriteLine(validationMessage);
+            Assert.IsTrue(isCustomErrorVisible || isHtmlErrorVisible);
         }
     }
 }
