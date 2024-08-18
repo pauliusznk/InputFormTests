@@ -68,9 +68,6 @@ namespace InputFormTests.Pages
             bool isCustomErrorVisible = await _ageCustomError.IsVisibleAsync();
             string validationMessage = await _ageInput.EvaluateAsync<string>("input => input.validationMessage");
             bool isHtmlErrorVisible = !string.IsNullOrEmpty(validationMessage);
-            Console.WriteLine(isCustomErrorVisible);
-            Console.WriteLine(isHtmlErrorVisible);
-            Console.WriteLine(validationMessage);
             Assert.IsTrue(isCustomErrorVisible || isHtmlErrorVisible);
         }
     }
