@@ -57,9 +57,6 @@ export class FormPage {
     const isCustomErrorVisible = await this.ageCustomError.isVisible();
     const validationMessage = await this.ageInput.evaluate<string>(input => (input as HTMLInputElement).validationMessage);
     const isHtmlErrorVisible = !!validationMessage;
-    console.log(isCustomErrorVisible);
-    console.log(isHtmlErrorVisible);
-    console.log(validationMessage);
     expect(isCustomErrorVisible || isHtmlErrorVisible).toBeTruthy();
   }
 }
